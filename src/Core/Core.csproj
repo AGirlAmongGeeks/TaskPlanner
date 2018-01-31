@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Model\ApplicationUser.cs" />
+    <Compile Remove="Model\Families\Group.cs" />
+    <Compile Remove="Model\Families\Squad.cs" />
+  </ItemGroup>
+
+</Project>
