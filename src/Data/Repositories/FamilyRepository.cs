@@ -8,6 +8,7 @@ using TaskPlanner.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Core.Model;
+using Data.Models;
 
 namespace Data.Repositories
 {
@@ -23,5 +24,31 @@ namespace Data.Repositories
                 .Where(c => c.IsActive == true)
                 .ToListAsync();
         }
+
+        public async Task<FamilyDto> GetByIdWithMembersAsync(int familyId)
+        {
+            var result = new FamilyDto();
+            result.Family = await _dbContext.Families
+                   .Where(c => c.Id == familyId)
+                   .FirstOrDefaultAsync();
+
+            if(result.Family != null)
+            {
+                result.Members = await _dbContext.Users
+                    .Where(c => c.Family.Id == familyId)
+                    .Select(c => new FamilyMemberDto() { Email = c.Email})
+                    .ToListAsync();
+            }
+
+            return result;
+        }
+
+        public Task<List<ApplicationUser>> GetFamilyMembers(int familyId)
+        {
+            return _dbContext.Users
+                .Where(c => c.Family.Id == familyId)
+                .ToListAsync();
+        }
+       
     }
 }

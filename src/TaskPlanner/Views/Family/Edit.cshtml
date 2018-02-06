@@ -1,0 +1,44 @@
+﻿@model TaskPlanner.Models.FamilyViewModel.FamilyViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Edit</h2>
+
+<h4>FamilyViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label"></label>
+                <input asp-for="IsActive" type="checkbox" class="form-control" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<h2>Family members</h2>
+<a asp-action="CreateMember" asp-route-familyId="@Model.Id"> Create new family member</a>
+@{await Html.RenderPartialAsync("_Members", Model.Members);}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_MembersScripts");}
+}

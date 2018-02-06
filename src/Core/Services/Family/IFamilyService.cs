@@ -13,6 +13,7 @@ namespace Core.Services
         Task<List<Family>> GetAllActiveAsync();
         Task<List<Family>> GetAllAsync();
         Task<Family> GetByIdAsync(int id);
+        Task<FamilyDto> GetByIdWithMembersAsync(int id);
         Task UpdateAsync(Family family);
     }
 }

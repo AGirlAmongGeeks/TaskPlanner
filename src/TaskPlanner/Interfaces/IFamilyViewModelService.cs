@@ -9,7 +9,7 @@ namespace TaskPlanner.Interfaces
 {
     public interface IFamilyViewModelService
     {
-        List<FamilyListItem> CreateViewModelList(List<Family> families);
-        FamilyViewModel CreateViewModel(Family family);
+        FamilyListViewModel CreateVMList(List<Family> families, FamilyListViewModel model = null);
+        FamilyViewModel CreateViewModel(FamilyDto family);
     }
 }

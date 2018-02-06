@@ -11,5 +11,6 @@ namespace Core.Interfaces
     public interface IFamilyRepository : IRepository<Family>, IAsyncRepository<Family>
     {
         Task<List<Family>> GetAllActive();
+        Task<FamilyDto> GetByIdWithMembersAsync(int id);
     }
 }

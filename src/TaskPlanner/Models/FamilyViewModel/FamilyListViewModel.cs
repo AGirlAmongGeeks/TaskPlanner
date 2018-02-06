@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace TaskPlanner.Models.FamilyViewModel
 {
-    public class FamilyListItem
+    public class FamilyListViewModel
     {
-        public int Id { get; set; }
-        public bool IsActive { get; set; }
-        public string Name { get; set; }
+        public bool ShowAll { get; set; }
+        public List<FamilyListItem> Items { get; set; }
     }
 }

@@ -39,6 +39,7 @@ namespace TaskPlanner
                 .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+            services.AddScoped(typeof(IUserRepository<>), typeof(EFUserRepository<>));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EFRepository<>));
 
             // Add application services.
@@ -46,6 +47,7 @@ namespace TaskPlanner
 
             services.AddScoped<IDutyService, DutyService>();
             services.AddScoped<IFamilyService, FamilyService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IFamilyRepository, FamilyRepository>();
             services.AddScoped<IFamilyViewModelService, FamilyViewModelService>();
             services.AddMvc();

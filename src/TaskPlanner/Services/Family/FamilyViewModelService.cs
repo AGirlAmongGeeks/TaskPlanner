@@ -30,14 +30,35 @@ namespace TaskPlanner.Services
             return viewModel;
         }
 
-        public List<FamilyListItem> CreateViewModelList(List<Family> families)
+        public FamilyViewModel CreateViewModel(FamilyDto family)
         {
-            var viewModel = new List<FamilyListItem>();
+            if(family != null && family.Family != null)
+            {
+                return new FamilyViewModel()
+                {
+                    Id = family.Family.Id,
+                    IsActive = family.Family.IsActive,
+                    Name = family.Family.Name,
+                    Members = family.Members
+                };
+            }
+            return null;
+        }
+
+        public FamilyListViewModel CreateVMList(List<Family> families, FamilyListViewModel viewModel = null)
+        {
+            if(viewModel == null)
+            {
+                viewModel = new FamilyListViewModel();
+            }
+
+            viewModel.Items = new List<FamilyListItem>();
             foreach(var f in families)
             {
-                viewModel.Add(new FamilyListItem()
+                viewModel.Items.Add(new FamilyListItem()
                 {
                     Id = f.Id,
+                    IsActive = f.IsActive,
                     Name = f.Name
                 });
             }

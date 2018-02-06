@@ -43,9 +43,15 @@ namespace Core.Services
             return await _familyRepository.GetByIdAsync(id);
         }
 
+        public async Task<FamilyDto> GetByIdWithMembersAsync(int id)
+        {
+            return await _familyRepository.GetByIdWithMembersAsync(id);
+        }
+
         public Task UpdateAsync(Family item)
         {
             return _familyRepository.UpdateAsync(item);
         }
+
     }
 }

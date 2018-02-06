@@ -1,47 +1,46 @@
-﻿@model List<TaskPlanner.Models.FamilyViewModel.FamilyListItem>
-
+﻿@model TaskPlanner.Models.FamilyViewModel.FamilyListViewModel
 @{
     ViewData["Title"] = "Index";
 }
-
 <h2>Index</h2>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-action="Index" method="post">
+    <input type="checkbox" asp-for="@Model.ShowAll" title="Show All" id="chkShowAll" />
+   <input type="submit" value="Search" />
+</form>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                   Name
-                </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.IsActive)
-                </th>*@
-                <th>
-                    Id
-                </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Is Active
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script type="text/javascript">
+
+</script>

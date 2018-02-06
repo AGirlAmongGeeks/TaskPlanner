@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Core.Model.FamilyMemberDto>
+<p>
+    <a asp-action="CreateMember">Create New Member</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <button class="btn-delete-member btn btn-primary" type="button" data-email="@item.Email"
+                            data-url="@Url.Action("deletefamilymember", "family")"
+                            >Remove member from family</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
