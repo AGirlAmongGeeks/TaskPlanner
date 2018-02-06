@@ -1,7 +1,4 @@
 ﻿@model IEnumerable<Core.Model.FamilyMemberDto>
-<p>
-    <a asp-action="CreateMember">Create New Member</a>
-</p>
 
 <table class="table">
     <thead>
@@ -20,10 +17,13 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    <button class="btn-delete-member btn btn-primary" type="button" data-email="@item.Email"
-                            data-url="@Url.Action("deletefamilymember", "family")"
-                            >Remove member from family</button>
-                </td>
+                    @Url.Action("RemoveMember", "family")
+                                <button class="btn-delete-member btn btn-primary" type="button" data-email="@item.Email"
+                                        data-url="@Url.Action("RemoveMember", "family")" @*data-familyId="@Model."*@
+                                        >
+                                    Remove member from family
+                                </button>
+                            </td>
             </tr>
         }
     </tbody>

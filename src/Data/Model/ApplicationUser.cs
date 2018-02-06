@@ -12,6 +12,7 @@ namespace Data.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser, IApplicationUser
     {
+        public int? FamilyId { get; set; }
         public Family Family { get; set; }
     }
 }

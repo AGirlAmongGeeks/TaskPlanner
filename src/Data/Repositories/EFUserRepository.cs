@@ -34,11 +34,12 @@ namespace Data.Repositories
 
         public void SetUserFamilyIdNull(string email, int familyId)
         {
-            var user = _dbContext.Users.Where(c => c.Email == email && c.Family != null && c.Family.Id == familyId).FirstOrDefault();
+            var user = _dbContext.ApplicationUser.Where(c => c.Email == email && c.Family != null && c.FamilyId == familyId).FirstOrDefault();
             if (user != null)
             {
-                user.Family = null;
-
+                user.FamilyId = (int?)null;
+                //user.Family = null;
+                
                 _dbContext.Entry(user).State = EntityState.Modified;
                 _dbContext.SaveChanges();
             }
