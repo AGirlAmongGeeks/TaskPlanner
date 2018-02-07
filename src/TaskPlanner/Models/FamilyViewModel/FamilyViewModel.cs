@@ -16,6 +16,6 @@ namespace TaskPlanner.Models.FamilyViewModel
         //TODO! Save family creator as its owner. Or maybe admin is owner of all the families?
         public int OwnerId { get; set; }
 
-        public List<FamilyMemberDto> Members { get; set; }
+        public MembersViewModel Members { get; set; }
     }
 }

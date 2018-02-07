@@ -38,7 +38,6 @@ namespace Data.Repositories
             if (user != null)
             {
                 user.FamilyId = (int?)null;
-                //user.Family = null;
                 
                 _dbContext.Entry(user).State = EntityState.Modified;
                 _dbContext.SaveChanges();

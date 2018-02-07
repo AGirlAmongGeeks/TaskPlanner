@@ -198,7 +198,8 @@ namespace TaskPlanner.Controllers
                 var model = _familyVMService.CreateViewModel(family);
                 if (model != null &&  model.Members != null)
                 {
-                    return Json(model.Members);
+                    return PartialView("_Members", model.Members);
+                    //return Json(model.Members); ;
                 }
 
                 return Json(new { message = "No data!" });

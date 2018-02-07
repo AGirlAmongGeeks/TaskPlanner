@@ -35,8 +35,9 @@
 
 <h2>Family members</h2>
 <a asp-action="CreateMember" asp-route-familyId="@Model.Id"> Create new family member</a>
-@{await Html.RenderPartialAsync("_Members", Model.Members);}
-
+<div class="js-members-list">
+    @{await Html.RenderPartialAsync("_Members", Model.Members);}
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -39,7 +39,11 @@ namespace TaskPlanner.Services
                     Id = family.Family.Id,
                     IsActive = family.Family.IsActive,
                     Name = family.Family.Name,
-                    Members = family.Members
+                    Members = new MembersViewModel()
+                    {
+                        FamilyId = family.Family.Id,
+                        Members = family.Members
+                    }
                 };
             }
             return null;

@@ -1,29 +1,27 @@
-﻿@model IEnumerable<Core.Model.FamilyMemberDto>
+﻿@model TaskPlanner.Models.FamilyViewModel.MembersViewModel
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Email
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Members)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Url.Action("RemoveMember", "family")
-                                <button class="btn-delete-member btn btn-primary" type="button" data-email="@item.Email"
-                                        data-url="@Url.Action("RemoveMember", "family")" @*data-familyId="@Model."*@
-                                        >
-                                    Remove member from family
-                                </button>
-                            </td>
+                    <button class="btn-delete-member btn btn-primary" type="button" data-email="@item.Email"
+                            data-url="@Url.Action("RemoveMember", "family")" data-familyId="@Model.FamilyId" >
+                        Remove member from family
+                    </button>
+                </td>
             </tr>
         }
     </tbody>

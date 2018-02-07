@@ -6,7 +6,7 @@
 
 function deleteFamilyMember(btn) {
     var email = btn.attr('data-email');
-    var familyId = 5;// btn.attr('data-familyId');
+    var familyId = btn.attr('data-familyid');
     url = btn.attr('data-url');
     console.log(url);
    
@@ -14,12 +14,12 @@ function deleteFamilyMember(btn) {
         url: url + "?email=" + email + '&familyId=' + familyId,
         type: "POST",
         success: function (data) {
-            if (data.Result) {
+            if (data.Message) {
+                //A msg is returned - something went wrong.
                 alert(data.Message);
-                //TODO reload partial view!!!
             }
             else {
-                alert(data.Message);
+                $('.js-members-list').html(data);
             }
         }
     });
