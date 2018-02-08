@@ -186,7 +186,7 @@ namespace TaskPlanner.Controllers
         }
         #endregion
 
-        
+        #region RemoveMember()
         [HttpPost]
         public async Task<ActionResult> RemoveMember(int familyId, string email)
         {
@@ -196,7 +196,7 @@ namespace TaskPlanner.Controllers
                 var family = await _familyService.GetByIdWithMembersAsync(familyId);
 
                 var model = _familyVMService.CreateViewModel(family);
-                if (model != null &&  model.Members != null)
+                if (model != null && model.Members != null)
                 {
                     return PartialView("_Members", model.Members);
                 }
@@ -206,8 +206,9 @@ namespace TaskPlanner.Controllers
             catch (Exception ex)
             {
                 //TODO
-                return Json(new { message = "Error!"}); 
+                return Json(new { message = "Error!" });
             }
-        }
+        } 
+        #endregion
     }
 }

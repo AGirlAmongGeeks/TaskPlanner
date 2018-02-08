@@ -19,6 +19,7 @@ namespace TaskPlanner.Services
             _familyRepository = familyRepository;
         }
 
+        #region CreateViewModel(Family)
         public FamilyViewModel CreateViewModel(Family f)
         {
             var viewModel = new FamilyViewModel()
@@ -28,11 +29,13 @@ namespace TaskPlanner.Services
             };
 
             return viewModel;
-        }
+        } 
+        #endregion
 
+        #region CreateViewModel()
         public FamilyViewModel CreateViewModel(FamilyDto family)
         {
-            if(family != null && family.Family != null)
+            if (family != null && family.Family != null)
             {
                 return new FamilyViewModel()
                 {
@@ -48,16 +51,18 @@ namespace TaskPlanner.Services
             }
             return null;
         }
+        #endregion
 
+        #region CreateVMList()
         public FamilyListViewModel CreateVMList(List<Family> families, FamilyListViewModel viewModel = null)
         {
-            if(viewModel == null)
+            if (viewModel == null)
             {
                 viewModel = new FamilyListViewModel();
             }
 
             viewModel.Items = new List<FamilyListItem>();
-            foreach(var f in families)
+            foreach (var f in families)
             {
                 viewModel.Items.Add(new FamilyListItem()
                 {
@@ -66,8 +71,9 @@ namespace TaskPlanner.Services
                     Name = f.Name
                 });
             }
-           
+
             return viewModel;
-        }
+        } 
+        #endregion
     }
 }
