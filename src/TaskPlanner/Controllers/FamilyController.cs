@@ -199,7 +199,6 @@ namespace TaskPlanner.Controllers
                 if (model != null &&  model.Members != null)
                 {
                     return PartialView("_Members", model.Members);
-                    //return Json(model.Members); ;
                 }
 
                 return Json(new { message = "No data!" });

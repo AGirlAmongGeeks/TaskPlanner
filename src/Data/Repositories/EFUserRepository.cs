@@ -22,6 +22,7 @@ namespace Data.Repositories
             _dbContext = dbContext;
         }
 
+        #region GetByEmail()
         public IApplicationUser GetByEmail(string email)
         {
             return _dbContext.Users.Where(c => c.Email == email).FirstOrDefault();
@@ -31,14 +32,16 @@ namespace Data.Repositories
         {
             return await _dbContext.Users.Where(c => c.Email == email).FirstOrDefaultAsync();
         }
+        #endregion
 
+        #region SetUserFamilyIdNull()
         public void SetUserFamilyIdNull(string email, int familyId)
         {
             var user = _dbContext.ApplicationUser.Where(c => c.Email == email && c.Family != null && c.FamilyId == familyId).FirstOrDefault();
             if (user != null)
             {
                 user.FamilyId = (int?)null;
-                
+
                 _dbContext.Entry(user).State = EntityState.Modified;
                 _dbContext.SaveChanges();
             }
@@ -54,6 +57,7 @@ namespace Data.Repositories
                 _dbContext.Entry(user).State = EntityState.Modified;
                 _dbContext.SaveChanges();
             }
-        }
+        } 
+        #endregion
     }
 }
