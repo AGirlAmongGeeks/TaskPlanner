@@ -18,6 +18,21 @@ namespace Data.Repositories
         {
         }
 
+        public async Task DesactivateAsync(int familyId)
+        {
+            var family = await _dbContext.Families
+                   .Where(c => c.Id == familyId)
+                   .FirstOrDefaultAsync();
+            if(family != null)
+            {
+                family.IsActive = false;
+
+                _dbContext.Entry(family).State = EntityState.Modified;
+                _dbContext.SaveChanges();
+            }
+        }
+
+
         public Task<List<Family>> GetAllActive()
         {
             return _dbContext.Families

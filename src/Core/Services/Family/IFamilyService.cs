@@ -15,5 +15,6 @@ namespace Core.Services
         Task<Family> GetByIdAsync(int id);
         Task<FamilyDto> GetByIdWithMembersAsync(int id);
         Task UpdateAsync(Family family);
+        Task DesactivateAsync(int familyId);
     }
 }

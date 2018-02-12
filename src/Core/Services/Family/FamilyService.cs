@@ -53,5 +53,10 @@ namespace Core.Services
             return _familyRepository.UpdateAsync(item);
         }
 
+        public async Task DesactivateAsync(int familyId)
+        {
+            //TODO Check admin/owner authentication.
+            await _familyRepository.DesactivateAsync(familyId);
+        }
     }
 }

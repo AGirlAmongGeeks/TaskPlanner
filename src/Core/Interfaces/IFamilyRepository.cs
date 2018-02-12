@@ -12,5 +12,6 @@ namespace Core.Interfaces
     {
         Task<List<Family>> GetAllActive();
         Task<FamilyDto> GetByIdWithMembersAsync(int id);
+        Task DesactivateAsync(int familyId);
     }
 }

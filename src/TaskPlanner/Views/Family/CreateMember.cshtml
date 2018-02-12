@@ -28,12 +28,8 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            TODO - below has to be hidden, automatically completed.
-            <div class="form-group">
-                <label asp-for="FamilyId" class="control-label"></label>
-                <input asp-for="FamilyId" class="form-control" />
-                <span asp-validation-for="FamilyId" class="text-danger"></span>
-            </div>
+            <input asp-for="FamilyId" type="hidden" />
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

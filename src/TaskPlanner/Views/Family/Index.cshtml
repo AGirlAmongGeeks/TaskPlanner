@@ -7,6 +7,7 @@
     <a asp-action="Create">Create New</a>
 </p>
 <form asp-action="Index" method="post">
+    <label for="chkShowAll">Show inactive</label>
     <input type="checkbox" asp-for="@Model.ShowAll" title="Show All" id="chkShowAll" />
    <input type="submit" value="Search" />
 </form>

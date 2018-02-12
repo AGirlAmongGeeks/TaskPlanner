@@ -208,7 +208,25 @@ namespace TaskPlanner.Controllers
                 //TODO
                 return Json(new { message = "Error!" });
             }
-        } 
+        }
+        #endregion
+
+        #region DesactivateFamily()
+        [HttpPost]
+        public async Task<ActionResult> DesactivateFamily(int familyId)
+        {
+            try
+            {
+                await _familyService.DesactivateAsync(familyId);
+
+                return await Edit(familyId);
+            }
+            catch (Exception ex)
+            {
+                //TODO
+                return Json(new { message = "Error!" });
+            }
+        }
         #endregion
     }
 }
