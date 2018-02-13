@@ -8,6 +8,7 @@ namespace Core.Interfaces
 {
     public interface IDutyRepository
     {
-        Task<List<Duty>> GetAllByUserId(int userId);
+        //Task<List<Duty>> GetAllByUserId(int userId);
+        Task<List<Duty>> GetByFamilyIdAsync(int familyId);
     }
 }

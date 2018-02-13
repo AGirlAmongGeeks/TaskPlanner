@@ -12,9 +12,9 @@ namespace Core.Services
     {
         private readonly IUserRepository<IApplicationUser> _userRepository;
 
-        public UserService(IUserRepository<IApplicationUser> familyRepository)
+        public UserService(IUserRepository<IApplicationUser>usrRepository)
         {
-            _userRepository = familyRepository;
+            _userRepository = usrRepository;
         }
    
         public async Task RemoveMemberFromFamilyAsync(int familyId, string email)

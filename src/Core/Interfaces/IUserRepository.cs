@@ -10,5 +10,7 @@ namespace Core.Interfaces
     {
         void SetUserFamilyIdNull(string email, int familyId);
         IApplicationUser GetByEmail(string email);
+        IApplicationUser GetByName(string name);
+        Task<IApplicationUser> GetByNameAsync(string name);
     }
 }

@@ -7,5 +7,6 @@ namespace Core.Model.Users
     public interface IApplicationUser
     {
         string Email { get; set; }
+        int? FamilyId { get; set; }
     }
 }

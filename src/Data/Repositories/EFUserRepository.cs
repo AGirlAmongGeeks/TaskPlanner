@@ -34,6 +34,16 @@ namespace Data.Repositories
         }
         #endregion
 
+        public IApplicationUser GetByName(string name)
+        {
+            return _dbContext.Users.Where(c => c.UserName == name).FirstOrDefault();
+        }
+
+        public async Task<IApplicationUser> GetByNameAsync(string name)
+        {
+            return await _dbContext.Users.Where(c => c.UserName == name).FirstOrDefaultAsync();
+        }
+
         #region SetUserFamilyIdNull()
         public void SetUserFamilyIdNull(string email, int familyId)
         {

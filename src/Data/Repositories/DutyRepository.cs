@@ -16,9 +16,10 @@ namespace Data.Repositories
         {
         }
 
-        public Task<List<Duty>> GetAllByUserId(int userId)
+        public async Task<List<Duty>> GetByFamilyIdAsync(int familyId)
         {
             throw new NotImplementedException();
+            //await _dbContext.Duties.Where(c => c.F)
         }
     }
 }

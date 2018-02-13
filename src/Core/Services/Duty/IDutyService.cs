@@ -10,5 +10,6 @@ namespace Core.Services
     {
         //Task AddItemToBasket(int basketId, int catalogItemId, decimal price, int quantity);
         //Task<List<Duty>> GetList(int userId);
+        Task<List<Duty>> GetListAsync(string name);
     }
 }
