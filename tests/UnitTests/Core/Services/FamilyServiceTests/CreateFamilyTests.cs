@@ -48,5 +48,23 @@ namespace UnitTests.Core.Services.FamilyServiceTests
         }
         #endregion
 
+        #region CreateFamily_AddExistingFamily_Pass()
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateFamily_AddExistingFamily_Pass()
+        {
+            //Arrange.
+            var mockRepo = new Mock<IFamilyRepository>();
+            var service = new FamilyService(mockRepo.Object);
+
+            mockRepo.Setup(x => x.Add(It.IsAny<Family>()));
+
+            //Act.
+            service.CreateAsync(Mock.Of<Family>(c => c.Name == "Wolfs" && c.Id == 15));
+
+            //Assert - no assert.
+        }
+        #endregion
+
     }
 }
