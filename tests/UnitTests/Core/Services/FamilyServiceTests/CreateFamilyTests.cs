@@ -66,5 +66,22 @@ namespace UnitTests.Core.Services.FamilyServiceTests
         }
         #endregion
 
+        #region CreateFamily_AddNullFamily()
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateFamily_AddNullFamily()
+        {
+            //Arrange.
+            var mockRepo = new Mock<IFamilyRepository>();
+            var service = new FamilyService(mockRepo.Object);
+
+            mockRepo.Setup(x => x.Add(It.IsAny<Family>()));
+
+            //Act.
+            service.CreateAsync(null);
+
+            //Assert - no assert.
+        }
+        #endregion
     }
 }

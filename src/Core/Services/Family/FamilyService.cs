@@ -16,18 +16,20 @@ namespace Core.Services
             _familyRepository = familyRepository;
         }
 
+        #region CreateAsync()
         public Task<Family> CreateAsync(Family item)
         {
-            if(item == null)
+            if (item == null)
             {
                 throw new ArgumentNullException("Object cannot be null");
             }
-            if(item.Id > 0)
+            if (item.Id > 0)
             {
                 throw new ArgumentException("Created Object Id should be 0. Do you want to update object?");
             }
             return _familyRepository.AddAsync(item);
-        }
+        } 
+        #endregion
 
         public async Task DeleteFamilyAsync(int familyId)
         {

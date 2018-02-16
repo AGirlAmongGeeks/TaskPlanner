@@ -213,18 +213,19 @@ namespace TaskPlanner.Controllers
 
         #region DesactivateFamily()
         [HttpPost]
-        public async Task<ActionResult> DesactivateFamily(int familyId)
+        public async Task<ActionResult> DesactivateFamily(int id)
         {
+            //TODO: ID is always null, fix it.
             try
             {
-                await _familyService.DesactivateAsync(familyId);
+                await _familyService.DesactivateAsync(id);
 
-                return await Edit(familyId);
+                return await Edit(id);
             }
             catch (Exception ex)
             {
                 //TODO
-                return Json(new { message = "Error!" });
+                return NotFound();
             }
         }
         #endregion
