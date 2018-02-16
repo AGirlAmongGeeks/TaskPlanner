@@ -215,7 +215,7 @@ namespace TaskPlanner.Controllers
         [HttpPost]
         public async Task<ActionResult> DesactivateFamily(int id)
         {
-            //TODO: ID is always null, fix it.
+            //TODO: ID is always 0, fix it.
             try
             {
                 await _familyService.DesactivateAsync(id);
