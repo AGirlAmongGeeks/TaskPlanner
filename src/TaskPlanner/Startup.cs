@@ -16,6 +16,9 @@ using Core.Services;
 using Core.Interfaces;
 using Data.Repositories;
 using TaskPlanner.Interfaces;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace TaskPlanner
 {
@@ -54,8 +57,14 @@ namespace TaskPlanner
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            ILoggerFactory loggerFactory)
         {
+            env.ConfigureNLog("nlog.config");
+            loggerFactory.AddNLog();
+            //add NLog.Web
+            app.AddNLogWeb();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

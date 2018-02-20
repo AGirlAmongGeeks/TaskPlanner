@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Data.Models;
 using TaskPlanner.Models.AccountViewModels;
 using TaskPlanner.Services;
+using Microsoft.Extensions.Logging;
 
 namespace TaskPlanner.Controllers
 {
@@ -19,6 +20,7 @@ namespace TaskPlanner.Controllers
         private readonly IUserService _userService;
         private readonly IFamilyViewModelService _familyVMService;
         private readonly IEmailSender _emailSender;
+        protected readonly ILogger<FamilyController> _logger;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -26,7 +28,8 @@ namespace TaskPlanner.Controllers
             IUserService userService,
                 IFamilyViewModelService familyVMService,
                 UserManager<ApplicationUser> userManager,
-                IEmailSender emailSender
+                IEmailSender emailSender,
+                ILogger<FamilyController> logger
             )
         {
             _familyService = familyService;
@@ -34,6 +37,7 @@ namespace TaskPlanner.Controllers
             _familyVMService = familyVMService;
             _userManager = userManager;
             _emailSender = emailSender;
+            _logger = logger;
         }
 
         #region Index()
@@ -109,34 +113,26 @@ namespace TaskPlanner.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(int id, FamilyViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                if(model?.Id == null)
                 {
-                    if(model?.Id == null)
-                    {
-                        return RedirectToAction("Index", "Family");
-                    }
-
-                    var family = await _familyService.GetByIdAsync(id);
-                    if(family != null)
-                    {
-                        family.Name = model.Name;
-                        family.IsActive = model.IsActive;
-                    }
-                   
-                    await _familyService.UpdateAsync(family);
-
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Family");
                 }
 
-                return View("Edit", model);
+                var family = await _familyService.GetByIdAsync(id);
+                if(family != null)
+                {
+                    family.Name = model.Name;
+                    family.IsActive = model.IsActive;
+                }
+                   
+                await _familyService.UpdateAsync(family);
+
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                //TODO
-                return View("Edit", model);
-            }
+
+            return View("Edit", model);
         }
         #endregion
 
@@ -190,24 +186,16 @@ namespace TaskPlanner.Controllers
         [HttpPost]
         public async Task<ActionResult> RemoveMember(int familyId, string email)
         {
-            try
-            {
-                await _userService.RemoveMemberFromFamilyAsync(familyId, email);
-                var family = await _familyService.GetByIdWithMembersAsync(familyId);
+            await _userService.RemoveMemberFromFamilyAsync(familyId, email);
+            var family = await _familyService.GetByIdWithMembersAsync(familyId);
 
-                var model = _familyVMService.CreateViewModel(family);
-                if (model != null && model.Members != null)
-                {
-                    return PartialView("_Members", model.Members);
-                }
-
-                return Json(new { message = "No data!" });
-            }
-            catch (Exception ex)
+            var model = _familyVMService.CreateViewModel(family);
+            if (model != null && model.Members != null)
             {
-                //TODO
-                return Json(new { message = "Error!" });
+                return PartialView("_Members", model.Members);
             }
+
+            return Json(new { message = "No data!" });
         }
         #endregion
 
@@ -215,7 +203,7 @@ namespace TaskPlanner.Controllers
         [HttpPost]
         public async Task<ActionResult> DesactivateFamily(int id)
         {
-            //TODO: ID is always 0, fix it.
+            //TODO: ID is always 0, fix it!
             try
             {
                 await _familyService.DesactivateAsync(id);
